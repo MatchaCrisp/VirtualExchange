@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy Stock
+{% endblock %}
+
+
+{% block main %}
+
+    <form action="/buy" method="POST">
+        <label for="symbol">
+            Stock Symbol:
+            {% if symb == "-1" %}
+                <input type="text" placeholder="enter a symbol" id="symbol" name="symbol" required>
+            {% else %}
+                <input type="text" value="{{symb}}" id="symbol" name="symbol" required>
+            {% endif %}
+        </label>
+        <label for="shares">
+            Number of shares to buy:
+            <input type="number" placeholder="enter number of shares" min=1 id="shares" name="shares" required>
+        </label>
+        <button type="submit">Buy!</button>
+    </form>
+
+{% endblock %}

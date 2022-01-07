@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="POST">
+        <label for="username">
+            Please enter a username:
+            <input type="text" placeholder="username" minlength=6 maxlength=16 id="username" name="username" required>
+        </label>
+
+        <label for="password">
+            Please enter a password (Min of 1 uppercase, 1 lowercase, and 1 number):
+            <input type="password" minlength=6 id="password" name="password" pattern="(?=.*[a-z]+)(?=.*[0-9]+)(?=.*[A-Z]+)^.{6,}$" required>
+        </label>
+
+        <label for="confirmation">
+            Please re-enter your password:
+            <input type="password" minlength=6 id="confirmation" name="confirmation" pattern="(?=.*[a-z]+)(?=.*[0-9]+)(?=.*[A-Z]+)^.{6,}$" required>
+        </label>
+
+        <button type="submit">
+            Register
+        </button>
+    </form>
+{% endblock %}

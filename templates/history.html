@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+    History
+{% endblock %}
+
+
+
+{% block main %}
+
+    {% if sortTran|length > 0 %}
+
+        <table>
+            <tr>
+                <th>Time</th>
+                <th>Symbol</th>
+                <th>Action</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+            {% for key in sortTran %}
+                <tr>
+                    <th>{{key}}</th>
+                </tr>
+                {% for trans in sortTran[key] %}
+                    <tr>
+                        <td>{{trans["time"]}}</td>
+                        <td>{{trans["symbol"]}}</td>
+                        <td>{{trans["action"]}}</td>
+                        <td>{{trans["shares"]}}</td>
+                        <td>{{trans["price"]|usd}}</td>
+                        <td>{{trans["change"]|usd}}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No history to show</p>
+    {% endif %}
+
+{% endblock %}

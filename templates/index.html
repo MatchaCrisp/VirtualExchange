@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+
+{% block main %}
+    <h2>Welcome, {{name}}!</h2>
+
+    <table id="summary">
+        <tr>
+            <th>Cash Balance</th>
+            <th>Total Value</th>
+        </tr>
+        <tr>
+            <td>{{cash|usd}}</td>
+            <td>{{total|usd}}</td>
+        </tr>
+    </table>
+    <table id="portfolio">
+        <tr>
+            <th>Symbol</th>
+            <th>avg. price</th>
+            <th># shares</th>
+            <th>book value</th>
+            <th>curr price</th>
+            <th>curr value</th>
+            <th>unrealized</th>
+            <th>realized</th>
+            <th>actions</th>
+        </tr>
+        {% for stock in portfolio %}
+
+            <tr>
+                <td>{{stock["symbol"]}}</td>
+                <td>{{stock["avg_price"]|usd}}</td>
+                <td>{{stock["num_shares"]}}</td>
+                <td>{{stock["buy_tot"]|usd}}</td>
+                <td>{{stock["curr"]|usd}}</td>
+                <td>{{stock["curr_val"]|usd}}</td>
+                <td>{{stock["unreal"]|usd}}</td>
+                <td>{{stock["sold_tot"]|usd}}</td>
+                <td>
+                    <form action="/" method="POST">
+                        <button type="submit" name="makeAct" value="{{'buy '+stock['symbol']}}">Buy</button>
+                        <button type="submit" name="makeAct" value="{{'sell '+stock['symbol']}}">Sell</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

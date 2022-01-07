@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Stock Quote
+{% endblock %}
+
+
+{% block main %}
+
+    <form action="/quote" method="POST">
+        <label for="symbol">
+            Enter a stock symbol:
+            <input type="text" id="symbol" name="symbol" required>
+        </label>
+        <button type="submit">Get Quote</button>
+    </form>
+
+    {% if stockData %}
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Symbol</th>
+            </tr>
+            <tr>
+                <td>{{stockData.name}}</td>
+                <td>{{stockData.price|usd}}</td>
+                <td>{{stockData.symbol}}</td>
+            </tr>
+        </table>
+
+    {% endif %}
+{% endblock %}

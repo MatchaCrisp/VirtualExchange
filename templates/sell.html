@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+    Sell Stock
+
+{% endblock %}
+
+
+
+{% block main %}
+
+    {% if owned|length < 1 %}
+        <p>You do not own any stocks at the moment!</p>
+    {% else %}
+        <form action="/sell" method="POST">
+            <label for="symbol">
+                Stock Symbol:
+                <select name = "symbol" id="symbol" required>
+                    {% for stock in owned %}
+                        <option value="{{stock['symbol']}}" {{"selected" if symb==stock['symbol'] else ""}}>{{stock['symbol']}}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label for="shares">
+                Number of shares to sell:
+                <input type="number" min=1 placeholder="enter a number larger than 0" name="shares" id="shares" required>
+            </label>
+
+            <button type="submit">Sell!</button>
+        </form>
+    {% endif %}
+
+{% endblock %}
